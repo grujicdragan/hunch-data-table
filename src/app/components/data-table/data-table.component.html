@@ -10,10 +10,11 @@
                 <div class="customise-cols">Customise Columns</div>
                 <ul *ngFor="let col of getSearchedColumns()">
                     <li>
-                            <input type="checkbox" 
+                            <mat-checkbox type="checkbox" 
                             [checked]="col.active" 
                             (change)="onCheckedColumn(col.active, col.prop)"
                             class="checkbox-column">
+                            </mat-checkbox>
                                 {{col.name}}
                     </li>
                 </ul>
@@ -42,10 +43,12 @@
             [resizeable]="false"
         >
             <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
-                <input type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" class="checkbox"/>
+                <mat-checkbox type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" class="checkbox">
+                </mat-checkbox>
             </ng-template>
             <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
-                <input type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)" class="checkbox"/>
+                <mat-checkbox type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)" class="checkbox">
+                </mat-checkbox>
             </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column
@@ -67,7 +70,7 @@
         >
             <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
                 <span>{{row[col.prop]}}</span>
-                <span style="margin-right: 14px; height: 15px; width: 15px; border-radius: 50%;" *ngIf="col.prop === 'status'" [ngStyle]="{'background-color': row[col.prop] === 'Active' ? 'green' : 'silver'}">
+                <span style="display: inline-block; margin-right: 14px; height: 15px; width: 15px; border-radius: 50%; position: relative; top: 5px; right: -33px;" *ngIf="col.prop === 'status'" [ngStyle]="{'background-color': row[col.prop] === 'Active' ? '#50D291' : 'silver', 'right': row[col.prop] === 'Active' ? '-42px' : '-33px'}">
                 </span>
             </ng-template>
         </ngx-datatable-column>
