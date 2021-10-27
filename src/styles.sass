@@ -1,1 +1,78 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~@swimlane/ngx-datatable/index.css'
+@import '~@swimlane/ngx-datatable/themes/material.scss'
+@import '~@swimlane/ngx-datatable/assets/icons.css'
+@import '~bootstrap/scss/bootstrap'
+
+//normalize
+*
+    margin: 0
+    padding: 0
+    box-sizing: border-box
+    font-family: 'Inter', sans-serif
+
+//colors
+$primary: #50D291
+$text-color: #273956
+$white: #fefefe
+
+.datatable-header
+    display: flex !important
+    align-items: center
+    justify-content: flex-start
+    background-color: #e4e4e4 !important
+
+.datatable-body-row
+    &:hover
+        background-color: lighten(#e4e4e4, 5%)
+    &.active
+        background-color: lighten($primary, 25%)
+
+datatable-body-cell
+        display: flex !important
+        align-items: center
+        justify-content: flex-start
+        border: 1px solid #e4e4e4
+        padding-left: 10px
+        &:first-of-type
+            justify-content: center !important
+            padding-left: 0
+        &:nth-of-type(2)
+            justify-content: center !important
+            padding-left: 0
+        &:nth-of-type(6)
+            justify-content: flex-end !important
+            padding-right: 10px
+        &:nth-of-type(7)
+            justify-content: flex-end !important
+            padding-right: 10px
+        &:nth-of-type(8)
+            justify-content: flex-end !important
+            padding-right: 10px
+        &:nth-of-type(9)
+            justify-content: flex-end !important
+            padding-right: 10px
+        &:nth-of-type(10)
+            justify-content: flex-end !important
+            padding-right: 10px
+        &:nth-of-type(11)
+            justify-content: flex-end !important
+            padding-right: 10px
+        &:nth-of-type(12)
+            justify-content: flex-end !important
+            padding-right: 10px
+        &:nth-of-type(13)
+            justify-content: flex-end !important
+            padding-right: 10px
+
+datatable-header-cell
+            border: 1px solid darken(#e4e4e4, 3%) !important
+            padding: 19px 0 18px 10px
+            &:first-of-type
+                padding-left: 10px
+
+.mat-slide-toggle-bar
+    background-color: #e4e4e4
+
+ul.pager li a
+    color: $text-color !important
+    padding-left: 20px

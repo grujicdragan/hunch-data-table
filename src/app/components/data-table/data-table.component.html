@@ -1,0 +1,76 @@
+<div class="table-wrapper" id="table_wrapper">
+    <div class="column-button">
+        <button (click)="open(content)" class="open-modal-btn">Columns<i class="arrow down"></i></button>
+    </div>
+
+    <ng-template #content let-modal>
+        <div class="modal-body">
+            <div class="cols-modal">
+                <input type="text" name="column" [(ngModel)]="searchColumns" class="search-cols" placeholder="Search columns">
+                <div class="customise-cols">Customise Columns</div>
+                <ul *ngFor="let col of getSearchedColumns()">
+                    <li>
+                            <input type="checkbox" 
+                            [checked]="col.active" 
+                            (change)="onCheckedColumn(col.active, col.prop)"
+                            class="checkbox-column">
+                                {{col.name}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </ng-template>
+
+    <div class="tbl">
+        <ngx-datatable 
+            [rows]="rows" 
+            [columnMode]="ColumnMode"
+            [headerHeight]="65" 
+            [footerHeight]="50" 
+            [rowHeight]="50" 
+            [scrollbarV]="false" 
+            [limit]="13" 
+            [selected]="selected" 
+            [selectionType]="SelectionType.checkbox" 
+            (select)="onSelect($event)"
+    >
+        <ngx-datatable-column 
+            [width]="40" 
+            [sortable]="false" 
+            [canAutoResize]="false" 
+            [draggable]="false" 
+            [resizeable]="false"
+        >
+            <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
+                <input type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" class="checkbox"/>
+            </ng-template>
+            <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
+                <input type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)" class="checkbox"/>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column
+            [width]="70" 
+            [sortable]="false" 
+            [canAutoResize]="false" 
+            [draggable]="false" 
+            [resizeable]="false"
+        >
+            <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
+                <mat-slide-toggle [checked]="row.enabled"></mat-slide-toggle>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column *ngFor="let col of getActiveColumns()"
+            [width]="col.width"
+            [name]="col.name" 
+            [prop]="col.prop" 
+            [hidden]="!col.active"
+        >
+            <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
+                <span>{{row[col.prop]}}</span>
+                <span style="margin-right: 14px; height: 15px; width: 15px; border-radius: 50%;" *ngIf="col.prop === 'status'" [ngStyle]="{'background-color': row[col.prop] === 'Active' ? 'green' : 'silver'}">
+                </span>
+            </ng-template>
+        </ngx-datatable-column>
+        </ngx-datatable>
+    </div>
+</div>
